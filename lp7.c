@@ -51,6 +51,55 @@ NODEPTR delete_front(NODEPTR list){
     freenode(p);
     return list;
 }
+NODEPTR delete_rear(NODEPTR list){
+    NODEPTR p,q;
+    if(list==NULL)
+    return NULL;
+    if(list->next==NULL){
+        printf("deleted %d at rear",p->info);
+        freenode(list);
+        return NULL;
+    }
+    q=list;
+    p=list->next;
+    while(p->next!=NULL){
+        q=p;
+        p=p->next;
+    }
+    printf("delted %d at rear",p->info);
+    freenode(p);
+    q->next=NULL;
+    return list;
+
+}
+NODEPTR concatenate(NODEPTR list1, NODEPTR list2){
+    if(list1==NULL)
+    return list2;
+    if(list2==NULL)
+    return list1;
+    NODEPTR q;
+    q=list1;
+    while(q->next!=NULL){
+        q=q->next;
+    }
+    q->next=list2;
+    return list1;
+
+}
+void search(NODEPTR list, int key){
+    NODEPTR p;
+    p=list;
+    while(p!=NULL){
+        if(p->info==key){
+            printf("Found");
+            return;
+        
+        }
+        p=p->next;
+    }
+    printf("not found");
+
+}
 void display(NODEPTR list){
     NODEPTR p;
     p=list;
@@ -65,9 +114,9 @@ void display(NODEPTR list){
 }
 int main(){
     NODEPTR list=NULL;
-    int choice, item;
+    int choice, item,key;
     while(1){
-    printf("\n1.Insert front\n2.Insert rear\n3.Delete front\n4.Display\n5.Exit\n");
+    printf("\n1.Insert front\n2.Insert rear\n3.Delete front\n4.Delete rear\5.Search\n6.Concatenate\n7.Display\n8.Exit\n");
     printf("Enter your choice:");
     scanf("%d",&choice);
     switch(choice){
@@ -85,9 +134,17 @@ int main(){
         list=delete_front(list);
         break;
         case 4:
-        display(list);
+        list=delete_rear(list);
         break;
         case 5:
+        printf("enter the key to search:");
+        scanf("%d",&key);
+        search(list,key);
+        break;
+        case 6:
+        display(list);
+        break;
+        case 7:
         exit(0);
         default:
         printf("Enter valid choice");
