@@ -56,7 +56,7 @@ NODEPTR delete_rear(NODEPTR list){
     if(list==NULL)
     return NULL;
     if(list->next==NULL){
-        printf("deleted %d at rear",p->info);
+        printf("deleted %d at rear",list->info);
         freenode(list);
         return NULL;
     }
